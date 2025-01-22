@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bagwvwspbmlxy"]
+
+[ext_resource type="PackedScene" uid="uid://eh88bwmi538" path="res://art/mob.glb" id="1_i7isv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5c7ls"]
+size = Vector3(1.59229, 0.913574, 1.95215)
+
+[node name="Mob" type="CharacterBody3D"]
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Character" parent="Pivot" instance=ExtResource("1_i7isv")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0.019043, 0.268755, -0.0800293)
+shape = SubResource("BoxShape3D_5c7ls")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0713974, 0.211767)
+aabb = AABB(-1.18645, -0.289489, -1.74791, 2.37289, 1.31433, 3.49582)
