@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cx2tcx82nm16a"]
+[gd_scene load_steps=7 format=3 uid="uid://cx2tcx82nm16a"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mvyrr"]
 [ext_resource type="PackedScene" uid="uid://cuohfiho8j1bt" path="res://entities/player.tscn" id="1_nux04"]
@@ -9,12 +9,6 @@ size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_e0kvj"]
 size = Vector3(60, 2, 60)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf0yi"]
-albedo_color = Color(0.782034, 0.399223, 0.139338, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_nsp5w"]
-material = SubResource("StandardMaterial3D_xf0yi")
 
 [sub_resource type="Curve3D" id="Curve3D_wialj"]
 _data = {
@@ -29,6 +23,8 @@ mob_scene = ExtResource("2_yn5ev")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_wx5oo")
@@ -50,29 +46,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
 projection = 1
 size = 19.0
 
-[node name="Cilinders" type="Node3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Cilinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -16)
-mesh = SubResource("CylinderMesh_nsp5w")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Cilinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 16)
-mesh = SubResource("CylinderMesh_nsp5w")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Cilinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -16)
-mesh = SubResource("CylinderMesh_nsp5w")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Cilinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 16)
-mesh = SubResource("CylinderMesh_nsp5w")
-
 [node name="SpawnPath" type="Path3D" parent="."]
 curve = SubResource("Curve3D_wialj")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
-transform = Transform3D(-0.00198428, 1.64847e-06, -0.999998, 1.13687e-13, 1, 1.64848e-06, 0.999998, 3.27092e-09, -0.00198428, -14.3769, 0.0130234, -16.3569)
+transform = Transform3D(-0.0019844, 1.64902e-06, -0.999998, 5.68434e-14, 1, 1.64902e-06, 0.999998, 3.27226e-09, -0.0019844, -14.3769, 0.0130234, -16.3569)
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
