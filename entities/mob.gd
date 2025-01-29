@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal squashed
+
 @export var min_speed: int = 10
 @export var max_speed: int = 18
 
@@ -17,4 +19,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	queue_free()
+
+func squash() -> void:
+	squashed.emit()
 	queue_free()

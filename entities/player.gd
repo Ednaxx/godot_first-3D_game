@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var speed: int = 14
 @export var fall_acceleration: int = 75
 @export var jump_impulse: int = 20
+@export var bounce_impulse: int = 16
 
 var target_velocity: Vector3 = Vector3.ZERO
 var can_double_jump: bool = true
@@ -40,3 +41,17 @@ func _physics_process(delta: float) -> void:
 		can_double_jump = false
 
 	self.move_and_slide()
+
+	for i in range(self.get_slide_collision_count()):
+		var collision: KinematicCollision3D = self.get_slide_collision(i)
+
+		if collision.get_collider() == null:
+			continue
+
+		if collision.get_collider().is_in_group("mob"):
+			var mob: CharacterBody3D = collision.get_collider()
+
+			if Vector3.UP.dot(collision.get_normal()) > 0.1:
+				mob.squash()
+				self.target_velocity.y = self.bounce_impulse
+				break
