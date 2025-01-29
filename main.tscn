@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx2tcx82nm16a"]
+[gd_scene load_steps=8 format=3 uid="uid://cx2tcx82nm16a"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_mvyrr"]
 [ext_resource type="PackedScene" uid="uid://cuohfiho8j1bt" path="res://entities/player.tscn" id="1_nux04"]
@@ -17,6 +17,9 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_hr8j8"]
+size = Vector3(1, 1, 33)
+
 [node name="Main" type="Node"]
 script = ExtResource("1_mvyrr")
 mob_scene = ExtResource("2_yn5ev")
@@ -25,21 +28,27 @@ mob_scene = ExtResource("2_yn5ev")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 4
 collision_mask = 0
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_wx5oo")
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_e0kvj")
+metadata/_edit_lock_ = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.961087, -0.082899, 0.263512, 0.0117124, 0.940824, 0.338694, -0.275996, 0.328601, -0.903243, -0.251539, 18.8353, -1.91404)
 shadow_enabled = true
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_nux04")]
+metadata/_edit_lock_ = true
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19)
@@ -48,6 +57,7 @@ size = 19.0
 
 [node name="SpawnPath" type="Path3D" parent="."]
 curve = SubResource("Curve3D_wialj")
+metadata/_edit_lock_ = true
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath"]
 transform = Transform3D(-0.0019844, 1.64902e-06, -0.999998, 5.68434e-14, 1, 1.64902e-06, 0.999998, 3.27226e-09, -0.0019844, -14.3769, 0.0130234, -16.3569)
@@ -55,5 +65,30 @@ transform = Transform3D(-0.0019844, 1.64902e-06, -0.999998, 5.68434e-14, 1, 1.64
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -16)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+shape = SubResource("BoxShape3D_hr8j8")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 15)
+shape = SubResource("BoxShape3D_hr8j8")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, 31.5)
+shape = SubResource("BoxShape3D_hr8j8")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, -0.5)
+shape = SubResource("BoxShape3D_hr8j8")
+metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
